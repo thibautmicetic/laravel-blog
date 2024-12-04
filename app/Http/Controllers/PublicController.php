@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
+    private String $articleDoesntExists = "Cet article n'existe pas !";
     public function index(User $user)
     {
         // On récupère les articles publiés de l'utilisateur
-        $articles = Article::where('user_id', $user->id)->where('draft', 0)->get();
+        $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);
 
         // On retourne la vue
         return view('public.index', [
@@ -26,7 +27,12 @@ class PublicController extends Controller
         // $article est l'article à afficher
 
         if($article->draft == 1) {
-            return redirect()->route('public.index', [$user->id])->with('errorDraft', 'Cet article n\'existe pas !');
+            return redirect()->route('public.index', [$user->id])->with('errorDraft', $this->articleDoesntExists);
+        }
+
+        // Vérification correspondance entre article et utilisateur, j'aurais pu faire un message d'erreur plus adapté
+        if($article->user_id != $user->id) {
+            return redirect()->route('public.index', [$user->id])->with('errorDraft', $this->articleDoesntExists);
         }
 
         // Je vous laisse faire le code

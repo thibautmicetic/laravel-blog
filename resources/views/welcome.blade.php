@@ -58,6 +58,25 @@
                                         @endif
                                     @endauth
                                 </nav>
+
+                                <!-- Utilisateurs -->
+                            <div class="text-2xl pb-6 text-gray-900 text-center mt-10">
+                                <h1 class="fw-bold">Utilisateurs</h1>
+                            </div>
+                                <hr>
+                                @foreach ($users as $user)
+                                    <div class="text-center">
+                                        <div class="p-6 text-gray-700 dark:text-gray-100">
+                                            <h2 class=" font-bold">
+                                                <a href="{{ route('public.index', [$user]) }}">{{$user->name}}</a>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                                <div class="mt-4">
+                                    {{$users->links()}}
+                                </div>
                             @endif
                         </div>
                     </main>

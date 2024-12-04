@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="text-center">
+    <div class="text-center mb-6 mt-3">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Liste des articles publiés de {{ $user->name }}
         </h2>
@@ -13,6 +13,7 @@
     @endif
 
     <div>
+        <hr>
         <!-- Articles -->
         @foreach ($articles as $article)
             <div>
@@ -25,5 +26,8 @@
             </div>
             <hr>
         @endforeach
+        <div class="mt-3">
+            {{ $articles->links() }}
+        </div>
     </div>
 </x-guest-layout>
