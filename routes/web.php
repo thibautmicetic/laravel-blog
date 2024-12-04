@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
@@ -20,6 +21,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->name('articles.edit');
     Route::post('/articles/{article}/update', [UserController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{article}/delete', [UserController::class, 'remove'])->name('articles.remove');
+
+    // Commentaires
+    Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
 });
 
 require __DIR__.'/auth.php';
