@@ -32,20 +32,23 @@
                     <main class="mt-6">
                         <div class="text">
                             @if (Route::has('login'))
-                                <nav class="-mx-3 flex flex-1 justify-center">
+                                <nav class="-mx-3 pb-10 flex flex-1 justify-center">
                                     @auth
-                                        <a
-                                            href="{{ url('/dashboard') }}"
-                                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Mes articles
-                                        </a>
+                                        <div class="flex items-center flex-col">
+                                            <p class="mb-2 text-sm">Vous êtes connecté</p>
+                                            <a
+                                                href="{{ url('/dashboard') }}"
+                                                class="rounded-md px-3 py-2 mr-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                            >
+                                                Mes articles
+                                            </a>
+                                        </div>
                                     @else
                                         <a
                                             href="{{ route('login') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                            Log in
+                                            {{ __('Log In')}}
                                         </a>
 
                                         @if (Route::has('register'))
@@ -53,29 +56,30 @@
                                                 href="{{ route('register') }}"
                                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                             >
-                                                Register
+                                            {{ __('Register') }}
                                             </a>
                                         @endif
                                     @endauth
                                 </nav>
 
                                 <!-- Utilisateurs -->
-                            <div class="text-2xl pb-6 text-gray-900 text-center mt-10">
-                                <h1 class="fw-bold">Utilisateurs</h1>
-                            </div>
-                                <hr>
-                                @foreach ($users as $user)
-                                    <div class="text-center">
-                                        <div class="p-6 text-gray-700 dark:text-gray-100">
-                                            <h2 class=" font-bold">
-                                                <a href="{{ route('public.index', [$user]) }}">{{$user->name}}</a>
-                                            </h2>
-                                        </div>
-                                    </div>
+                                <div class="text-center mt-10">
+                                    <h1 class="fw-bold text-2xl pb-6 text-gray-900">Utilisateurs</h1>
+
                                     <hr>
-                                @endforeach
-                                <div class="mt-4">
-                                    {{$users->links()}}
+                                    @foreach ($users as $user)
+                                        <div class="text-center">
+                                            <div class="p-6 text-gray-700 dark:text-gray-100">
+                                                <h2 class=" font-bold">
+                                                    <a href="{{ route('public.index', [$user]) }}">{{$user->name}}</a>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    @endforeach
+                                    <div class="mt-4">
+                                        {{$users->links()}}
+                                    </div>
                                 </div>
                             @endif
                         </div>

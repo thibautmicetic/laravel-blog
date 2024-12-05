@@ -21,34 +21,14 @@
         </div>
     </x-card>
 
-    @auth
-        <x-card>
-            <p class="text-gray-700">Commentaires</p>
+    <x-card>
+        <div class="text-center">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mb-3">
+                Commentaires
+            </h2>
+        </div>
 
-
-            @if($comments->isEmpty())
-                <x-card :width="$isFullWidth">
-                    <div class="text-gray-500 text-sm">
-                        Aucun commentaire
-                    </div>
-                </x-card>
-                @else
-                @foreach($comments as $comment)
-                    <x-card :width="$isFullWidth">
-                        <div class="text-gray-500 text-sm">
-                            Publié le {{ $comment->created_at->format('d/m/Y') }} par {{ $article->user->name }}
-                        </div>
-
-                        <div class="text-gray-500 text-sm">
-                            {{$comment->content}}
-                        </div>
-                    </x-card>
-                @endforeach
-                <div class="mt-6">
-                    {{$comments->links()}}
-                </div>
-            @endif
-
+        @auth
             <!-- Ajout d'un commentaire -->
             <form action="{{ route('comments.store', ['article' => $article->id]) }}" method="post" class="mt-6">
                 @csrf
@@ -60,18 +40,41 @@
                         <!-- Input de titre de l'article -->
                         <textarea type="text" rows="5" name="comment" id="comment" placeholder="Votre commentaire" class="w-full rounded-md @if($errors->has('comment')) border-red-500 @else border-gray-300 @endif shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('comment') is-invalid @enderror"></textarea>
                         @error('comment')
-                            <div class="alert alert-danger text-red-500 pt-2">Ce champs est requis</div>
+                        <div class="alert alert-danger text-red-500 pt-2">Ce champs est requis</div>
                         @enderror
                     </div>
                 </div>
 
                 <div>
-                    <button type="submit" class="mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button type="submit" class="shadow-md mt-6 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Publier
                     </button>
                 </div>
             </form>
-        </x-card>
+        @endauth
 
-    @endauth
+        @if($comments->isEmpty())
+            <x-card :width="$isFullWidth">
+                <div class="text-gray-500 text-sm">
+                    Aucun commentaire
+                </div>
+            </x-card>
+        @else
+            @foreach($comments as $comment)
+                <x-card :width="$isFullWidth">
+                    <div class="text-gray-500 text-sm">
+                        Publié le {{ $comment->created_at->format('d/m/Y') }} par {{ $article->user->name }}
+                    </div>
+
+                    <div class="text-gray-500 text-sm">
+                        {{$comment->content}}
+                    </div>
+                </x-card>
+            @endforeach
+            <div class="mt-6">
+                {{$comments->links()}}
+            </div>
+        @endif
+    </x-card>
+
 </x-guest-layout>

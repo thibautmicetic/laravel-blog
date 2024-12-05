@@ -17,13 +17,13 @@ Route::middleware('auth')->group(function () {
 
     // Articles
     Route::get('/articles/create', [UserController::class, 'create'])->name('articles.create');
-    Route::post('/articles/store', [UserController::class, 'store'])->name('articles.store');
+    Route::post('/articles/store', [UserController::class, 'store'])->middleware('throttle:10,1')->name('articles.store');
     Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->name('articles.edit');
-    Route::post('/articles/{article}/update', [UserController::class, 'update'])->name('articles.update');
+    Route::put('/articles/{article}/update', [UserController::class, 'update'])->middleware('throttle:10,1')->name('articles.update');
     Route::delete('/articles/{article}/delete', [UserController::class, 'remove'])->name('articles.remove');
 
     // Commentaires
-        Route::post('/comments/store/{article}', [CommentController::class, 'store'])->name('comments.store');
+    Route::post('/comments/store/{article}', [CommentController::class, 'store'])->middleware('throttle:10,1')->name('comments.store');
 });
 
 require __DIR__.'/auth.php';
