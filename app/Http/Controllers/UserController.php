@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+
+    private String $emptyContent = "emptyContent";
     public function index()
     {
         // On récupère l'utilisateur connecté.
@@ -31,6 +33,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // On récupère les données du formulaire
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        if(!$validated) {
+            return redirect()->route('articles.create')->with('formErrors');
+        }
+
         $data = $request->only(['title', 'content', 'draft']);
 
         // Créateur de l'article (auteur)
@@ -73,6 +84,15 @@ class UserController extends Controller
         // On vérifie que l'utilisateur est bien le créateur de l'article
         if ($article->user_id !== Auth::user()->id) {
             abort(403);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        if(!$validated) {
+            return redirect()->route('articles.create')->with('formErrors');
         }
 
         // On récupère les données du formulaire

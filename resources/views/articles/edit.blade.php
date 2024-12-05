@@ -11,12 +11,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <!-- Input de titret de l'article -->
-                    <input type="text" value="{{ $article->title }}" name="title" id="title" placeholder="Titre de l'article" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <input type="text" value="{{ $article->title }}" name="title" id="title" placeholder="Titre de l'article" class="w-full rounded-md @if($errors->has('title')) border-red-500 @else border-gray-300 @endif shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('title') is-invalid @enderror">
+                    @error('title')
+                    <div class="alert alert-danger text-red-500 pt-2">Ce champs est requis</div>
+                    @enderror
                 </div>
 
                 <div class="p-6 pt-0 text-gray-900">
                     <!-- Contenu de l'article -->
-                    <textarea rows="30" name="content" id="content" placeholder="Contenu de l'article" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{ $article->content }}</textarea>
+                    <textarea rows="30" name="content" id="content" placeholder="Contenu de l'article" class="w-full rounded-md @if($errors->has('content')) border-red-500 @else border-gray-300 @endif shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('content') is-invalid @enderror">{{ $article->content }}</textarea>
+                    @error('content')
+                    <div class="alert alert-danger text-red-500 pt-2">Ce champs est requis</div>
+                    @enderror
                 </div>
 
                 <div class="p-6 text-gray-900 flex items-center">
