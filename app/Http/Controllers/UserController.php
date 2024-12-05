@@ -39,7 +39,7 @@ class UserController extends Controller
         ]);
 
         if(!$validated) {
-            return redirect()->route('articles.create')->with('formErrors');
+            return redirect()->route('articles.create');
         }
 
         $data = $request->only(['title', 'content', 'draft']);
@@ -92,7 +92,7 @@ class UserController extends Controller
         ]);
 
         if(!$validated) {
-            return redirect()->route('articles.create')->with('formErrors');
+            return redirect()->route('articles.create');
         }
 
         // On récupère les données du formulaire

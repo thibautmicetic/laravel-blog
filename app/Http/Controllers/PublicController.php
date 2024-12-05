@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,6 @@ class PublicController extends Controller
     private String $articleDoesntExists = "Cet article n'existe pas !";
     public function index(User $user)
     {
-        // On récupère les articles publiés de l'utilisateur
         $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);
 
         // On retourne la vue
@@ -35,9 +35,12 @@ class PublicController extends Controller
             return redirect()->route('public.index', [$user->id])->with('errorDraft', $this->articleDoesntExists);
         }
 
+        $comments = Comment::where('article_id', $article->id)->paginate(5);
+
         // Je vous laisse faire le code
         return view('public.show', [
             'article' => $article,
+            'comments' => $comments,
             'user' => $user
         ]);
     }

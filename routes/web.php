@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/articles/{article}/delete', [UserController::class, 'remove'])->name('articles.remove');
 
     // Commentaires
-    Route::post('/comments/store', [CommentController::class, 'store'])->name('comments.store');
+        Route::post('/comments/store/{article}', [CommentController::class, 'store'])->name('comments.store');
 });
 
 require __DIR__.'/auth.php';
