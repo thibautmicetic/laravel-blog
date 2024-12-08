@@ -16,9 +16,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Articles
-    Route::get('/articles/create', [UserController::class, 'create'])->name('articles.create');
+    Route::get('/articles/create', [UserController::class, 'create'])->middleware('throttle:10,1')->name('articles.create');
     Route::post('/articles/store', [UserController::class, 'store'])->middleware('throttle:10,1')->name('articles.store');
-    Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->name('articles.edit');
+    Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->middleware('throttle:10,1')->name('articles.edit');
     Route::put('/articles/{article}/update', [UserController::class, 'update'])->middleware('throttle:10,1')->name('articles.update');
     Route::delete('/articles/{article}/delete', [UserController::class, 'remove'])->name('articles.remove');
     Route::get('/articles/{article}/like', [UserController::class, 'like'])->middleware('throttle:20,1')->name('article.like');
