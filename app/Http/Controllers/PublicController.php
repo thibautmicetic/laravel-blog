@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    private String $articleDoesntExists = "Cet article n'existe pas !";
+    private String $articleDoesntExists = "Cet article n'existe pas !"
+    ;
     public function index(User $user)
     {
         $articles = Article::where('user_id', $user->id)->where('draft', 0)->paginate(5);

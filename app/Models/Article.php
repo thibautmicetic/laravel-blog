@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Article
- * 
+ *
  * @property int $id
  * @property int|null $user_id
  * @property string $title
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool|null $draft
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property User|null $user
  * @property Collection|Category[] $categories
  * @property Collection|Tag[] $tags
@@ -34,14 +34,16 @@ class Article extends Model
 
 	protected $casts = [
 		'user_id' => 'int',
-		'draft' => 'bool'
+		'draft' => 'bool',
+        'likes' => 'int'
 	];
 
 	protected $fillable = [
 		'user_id',
 		'title',
 		'content',
-		'draft'
+		'draft',
+        'likes',
 	];
 
 	public function user()

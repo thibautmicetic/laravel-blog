@@ -40,7 +40,7 @@
                                                 href="{{ url('/dashboard') }}"
                                                 class="rounded-md px-3 py-2 mr-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                             >
-                                                Mes articles
+                                                Voir mon blog
                                             </a>
                                         </div>
                                     @else
@@ -64,6 +64,7 @@
 
                                 <!-- Utilisateurs -->
                                 <div class="text-center mt-10">
+
                                     <h1 class="fw-bold text-2xl pb-6 text-gray-900">Utilisateurs</h1>
 
                                     <hr>

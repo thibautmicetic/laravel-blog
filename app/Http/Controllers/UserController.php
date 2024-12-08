@@ -11,6 +11,7 @@ class UserController extends Controller
 {
 
     private String $emptyContent = "emptyContent";
+
     public function index()
     {
         // On récupère l'utilisateur connecté.
@@ -26,6 +27,7 @@ class UserController extends Controller
             'articles' => $articles
         ]);
     }
+
     public function create()
     {
         $categories = Category::all();
@@ -120,5 +122,12 @@ class UserController extends Controller
         $article->delete();
 
         return redirect()->route('dashboard')->with('deleteSuccess', 'Article supprimé !');
+    }
+
+    public function like(Article $article) {
+        $article->likes++;
+        $article->save();
+
+        return redirect()->route('public.show', [$article->user_id, $article->id]);
     }
 }
