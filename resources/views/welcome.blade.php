@@ -32,7 +32,7 @@
                     <main class="mt-6">
                         <div class="text">
                             @if (Route::has('login'))
-                                <nav class="-mx-3 pb-10 flex flex-1 justify-center">
+                                <nav class="-mx-3 pb-4 flex flex-1 justify-center">
                                     @auth
                                         <div class="flex items-center flex-col">
                                             <p class="mb-2 text-sm">Vous êtes connecté</p>
@@ -63,9 +63,31 @@
                                 </nav>
 
                                 <!-- Utilisateurs -->
-                                <div class="text-center mt-10">
+                                <div class="text-center mt-3">
+                                    <h2 class="text-gray-900 text-2xl">{{ __('Articles les plus likés') }}</h2>
+                                    @foreach ($articles as $article)
+                                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
+                                            <div class="p-6 text-gray-900">
+                                                <h2 class="text-2xl font-bold">{{ $article->title }}</h2>
+                                                <div class="text-gray-500 text-sm">
+                                                    Publié le {{ $article->created_at->format('d/m/Y') }} par <a href="{{ route('public.index', $article->user->id) }}">{{ $article->user->name }}</a>
+                                                </div>
+                                                <div class="flex">
+                                                    @foreach ($article->categories as $category)
+                                                        <div class="bg-gray-200 rounded-full mr-2 my-1 p-2 text-sm">
+                                                            <h3>{{ $category->name }}</h3>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <p class="text-gray-700">{{ substr($article->content, 0, 30) }}...</p>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('public.show', [$article->user_id, $article->id]) }}" class="block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center">
+                                            <span>Voir</span>
+                                        </a>
+                                    @endforeach
 
-                                    <h1 class="fw-bold text-2xl pb-6 text-gray-900">Utilisateurs</h1>
+                                    <h1 class="fw-bold text-2xl py-6 text-gray-900">Utilisateurs</h1>
 
                                     <hr>
                                     @foreach ($users as $user)
