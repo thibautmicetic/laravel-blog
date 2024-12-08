@@ -15,11 +15,11 @@
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Accueil') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Mes articles') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('articles.create')" :active="request()->routeIs('article.create')">
-                        Créer un article
+                        {{ __('Créer un article') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Voir mon blog') }}
                     </x-nav-link>
                 </div>
             </div>

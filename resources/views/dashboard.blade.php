@@ -36,6 +36,16 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
                     <div class="p-6 text-gray-900">
                         <h2 class="text-2xl font-bold">{{ $article->title }}</h2>
+                        <div class="text-gray-500 text-sm">
+                            Publié le {{ $article->created_at->format('d/m/Y') }} par <a href="{{ route('public.index', $article->user->id) }}">{{ $article->user->name }}</a>
+                        </div>
+                        <div class="flex">
+                            @foreach ($article->categories as $category)
+                                <div class="bg-gray-200 rounded-full mr-2 my-1 p-2 text-sm">
+                                    <h3>{{ $category->name }}</h3>
+                                </div>
+                            @endforeach
+                        </div>
                         <p class="text-gray-700">{{ substr($article->content, 0, 30) }}...</p>
                         <div class="d-flex flex-row">
                             <div class="text-right">

@@ -14,6 +14,14 @@
             Publié le {{ $article->created_at->format('d/m/Y') }} par <a href="{{ route('public.index', $article->user->id) }}">{{ $article->user->name }}</a>
         </div>
 
+        <div class="flex">
+            @foreach ($article->categories as $category)
+                <div class="bg-gray-200 rounded-full mr-2 my-1 p-2 text-sm">
+                    <h3>{{ $category->name }}</h3>
+                </div>
+            @endforeach
+        </div>
+
         <div>
             <div class="mt-6 text-gray-900 dark:text-gray-100">
                 <p class="text-gray-700 dark:text-gray-300">{{ $article->content }}</p>
