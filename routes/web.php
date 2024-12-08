@@ -21,8 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->name('articles.edit');
     Route::put('/articles/{article}/update', [UserController::class, 'update'])->middleware('throttle:10,1')->name('articles.update');
     Route::delete('/articles/{article}/delete', [UserController::class, 'remove'])->name('articles.remove');
-    Route::get('/articles/{article}/like', [UserController::class, 'like'])->name('article.like');
-
+    Route::get('/articles/{article}/like', [UserController::class, 'like'])->middleware('throttle:20,1')->name('article.like');
 
     // Commentaires
     Route::post('/comments/store/{article}', [CommentController::class, 'store'])->middleware('throttle:10,1')->name('comments.store');
