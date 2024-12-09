@@ -18,9 +18,15 @@
                     @enderror
                 </div>
 
-                <div class="pb-6 pl-6 text-gray-900">
+                <div class="pb-6 px-6 text-gray-900">
+                    <!-- Label du select -->
+                    <label for="categories" class="block text-sm font-medium text-gray-700 mb-2">
+                        Sélectionnez les catégories
+                    </label>
+
                     <!-- Select des catégories de l'article -->
-                    <select name="categories[]" multiple id="categories">
+                    <select name="categories[]" id="categories" multiple
+                            class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}"
                                     @if($article->categories->contains($category->id)) selected @endif>
@@ -29,7 +35,6 @@
                         @endforeach
                     </select>
                 </div>
-
 
                 <div class="p-6 pt-0 text-gray-900">
                     <!-- Contenu de l'article -->
