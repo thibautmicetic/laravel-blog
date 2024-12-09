@@ -18,6 +18,19 @@
                     @enderror
                 </div>
 
+                <div class="pb-6 pl-6 text-gray-900">
+                    <!-- Select des catégories de l'article -->
+                    <select name="categories[]" multiple id="categories">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}"
+                                    @if($article->categories->contains($category->id)) selected @endif>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+
                 <div class="p-6 pt-0 text-gray-900">
                     <!-- Contenu de l'article -->
                     <textarea rows="30" name="content" id="content" placeholder="Contenu de l'article" class="w-full rounded-md @if($errors->has('content')) border-red-500 @else border-gray-300 @endif shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 @error('content') is-invalid @enderror">{{ $article->content }}</textarea>

@@ -79,9 +79,12 @@ class UserController extends Controller
             return redirect()->route('dashboard')->with('error', 'Vous ne pouvez pas modifier cet article !');
         }
 
+        $categories = Category::all();
+
         // On retourne la vue avec l'article
         return view('articles.edit', [
-            'article' => $article
+            'article' => $article,
+            'categories' => $categories,
         ]);
     }
 
@@ -109,6 +112,8 @@ class UserController extends Controller
 
         // On met à jour l'article
         $article->update($data);
+
+        $article->categories()->sync($request->input('categories'));
 
         // On redirige l'utilisateur vers la liste des articles (avec un flash)
         return redirect()->route('dashboard')->with('updateSuccess', 'Article mis à jour !');
