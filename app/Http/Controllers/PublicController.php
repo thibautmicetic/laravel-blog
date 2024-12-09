@@ -36,7 +36,7 @@ class PublicController extends Controller
             return redirect()->route('public.index', [$user->id])->with('errorDraft', $this->articleDoesntExists);
         }
 
-        $comments = Comment::where('article_id', $article->id)->paginate(5);
+        $comments = Comment::where('article_id', $article->id)->orderBy('created_at', 'desc')->paginate(5);
 
         // Je vous laisse faire le code
         return view('public.show', [
